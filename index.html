@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Registration Form -->
+    <section class="registration">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="userType">I am a</label>
+            <select id="userType" name="userType" required>
+                <option value="seller">Seller</option>
+                <option value="buyer">Buyer</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </section>
+    
+
+
+
+    <!-- Seller Section -->
+    <section class="seller-section" style="display: none;">
+        <h2>Post Property</h2>
+        <form id="postPropertyForm">
+            <label for="propertyTitle">Property Title</label>
+            <input type="text" id="propertyTitle" name="propertyTitle" required>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="area">Area (sq ft)</label>
+            <input type="number" id="area" name="area" required>
+
+            <label for="bedrooms">Number of Bedrooms</label>
+            <input type="number" id="bedrooms" name="bedrooms" required>
+
+            <label for="bathrooms">Number of Bathrooms</label>
+            <input type="number" id="bathrooms" name="bathrooms" required>
+
+            <label for="nearbyFacilities">Nearby Facilities (Hospitals, Colleges, etc.)</label>
+            <input type="text" id="nearbyFacilities" name="nearbyFacilities" required>
+
+            <button type="submit">Post Property</button>
+        </form>
+
+        <h2>Your Properties</h2>
+        <div id="sellerPropertiesList">
+            <!-- Seller's properties will be listed here -->
+        </div>
+    </section>
+
+    <!-- Buyer Section -->
+    <section class="buyer-section" style="display: none;">
+        <h2>Available Properties</h2>
+        <div class="filters">
+            <label for="filterPrice">Max Price</label>
+            <input type="number" id="filterPrice" name="filterPrice">
+
+            <label for="filterBedrooms">Min Bedrooms</label>
+            <input type="number" id="filterBedrooms" name="filterBedrooms">
+
+            <button type="button" id="applyFilters">Apply Filters</button>
+        </div>
+        <div id="propertyList">
+            <!-- Property items will be dynamically added here -->
+        </div>
+        <div id="pagination">
+            <!-- Pagination buttons will be dynamically added here -->
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

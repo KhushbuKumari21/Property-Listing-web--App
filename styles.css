@@ -1,0 +1,145 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h2 {
+    color: #495057;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px; /* Increased padding for better button appearance */
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px; /* Increased border radius for a softer look */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filters label,
+.filters input[type="number"] {
+    flex: 1;
+    margin-right: 10px;
+    min-width: 150px;
+}
+
+.filters button {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 12px 20px; /* Increased padding for better button appearance */
+    margin-top: 5px;
+}
+
+.property-item {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.property-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.property-item h3 {
+    margin-top: 0;
+    color: #343a40;
+}
+
+.property-item p {
+    margin: 8px 0;
+    color: #495057;
+}
+
+.property-item .button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.property-item button {
+    padding: 5px 5px; /* Adjusted padding for smaller buttons */
+    margin:3px;
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px; /* Increased border radius for a softer look */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transition for smoother hover effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow for depth effect */
+}
+
+.property-item button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px); /* Added slight upward movement on hover for interactive feel */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased box shadow on hover for depth effect */
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters label,
+    .filters input[type="number"],
+    .filters button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
