@@ -14,35 +14,37 @@ document.getElementById('registrationForm').addEventListener('submit', function(
 
 document.getElementById('postPropertyForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const propertyList = document.getElementById('sellerPropertiesList');
-    const propertyTitle = document.getElementById('propertyTitle').value;
-    const price = document.getElementById('price').value;
-    const area = document.getElementById('area').value;
-    const bedrooms = document.getElementById('bedrooms').value;
-    const bathrooms = document.getElementById('bathrooms').value;
-    const nearbyFacilities = document.getElementById('nearbyFacilities').value;
+    
+    if (validatePostPropertyForm()) {
+        const propertyList = document.getElementById('sellerPropertiesList');
+        const propertyTitle = document.getElementById('propertyTitle').value;
+        const price = document.getElementById('price').value;
+        const area = document.getElementById('area').value;
+        const bedrooms = document.getElementById('bedrooms').value;
+        const bathrooms = document.getElementById('bathrooms').value;
+        const nearbyFacilities = document.getElementById('nearbyFacilities').value;
 
-    const propertyItem = document.createElement('div');
-    propertyItem.className = 'property-item';
-    propertyItem.innerHTML = `
-        <h3>${propertyTitle}</h3>
-        <p>Price: ${price}</p>
-        <p>Area: ${area} sq ft</p>
-        <p>Bedrooms: ${bedrooms}</p>
-        <p>Bathrooms: ${bathrooms}</p>
-        <p>Nearby: ${nearbyFacilities}</p>
-        <button onclick="editProperty(this)">Edit</button>
-        <button onclick="deleteProperty(this)">Delete</button>
-        <button onclick="showSellerDetails('${propertyTitle}')">I'm Interested</button>
-        <button onclick="likeProperty(this)">Like</button>
-        <span class="like-count">0</span>
-    `;
+        const propertyItem = document.createElement('div');
+        propertyItem.className = 'property-item';
+        propertyItem.innerHTML = `
+            <h3>${propertyTitle}</h3>
+            <p>Price: ${price}</p>
+            <p>Area: ${area} sq ft</p>
+            <p>Bedrooms: ${bedrooms}</p>
+            <p>Bathrooms: ${bathrooms}</p>
+            <p>Nearby: ${nearbyFacilities}</p>
+            <button onclick="editProperty(this)">Edit</button>
+            <button onclick="deleteProperty(this)">Delete</button>
+            <button onclick="showSellerDetails('${propertyTitle}')">I'm Interested</button>
+            <button onclick="likeProperty(this)">Like</button>
+            <span class="like-count">0</span>
+        `;
 
-    propertyList.appendChild(propertyItem);
+        propertyList.appendChild(propertyItem);
 
-    alert('Property Posted');
-
-    document.getElementById('postPropertyForm').reset();
+        alert('Property Posted');
+        document.getElementById('postPropertyForm').reset();
+    }
 });
 
 document.getElementById('applyFilters').addEventListener('click', function() {
@@ -80,6 +82,21 @@ document.getElementById('applyFilters').addEventListener('click', function() {
 
     alert('Filters Applied');
 });
+
+function validatePostPropertyForm() {
+    const title = document.getElementById('propertyTitle').value;
+    const price = document.getElementById('price').value;
+    const area = document.getElementById('area').value;
+    const bedrooms = document.getElementById('bedrooms').value;
+    const bathrooms = document.getElementById('bathrooms').value;
+
+    if (!title || !price || !area || !bedrooms || !bathrooms) {
+        alert('Please fill in all fields.');
+        return false;
+    }
+
+    return true;
+}
 
 function likeProperty(button) {
     const likeCount = button.nextElementSibling;
@@ -121,9 +138,12 @@ function showSellerDetails(propertyTitle) {
     const buyerName = prompt("Enter your name:");
     const buyerEmail = prompt("Enter your email:");
 
-   
-    sendEmailToSeller(buyerName, buyerEmail, propertyTitle);
-    // In a real application, you would fetch and display seller details here
+    if (buyerName && buyerEmail) {
+        sendEmailToSeller(buyerName, buyerEmail, propertyTitle);
+        // In a real application, you would fetch and display seller details here
+    } else {
+        alert("Please provide valid name and email.");
+    }
 }
 
 function loadProperties() {
