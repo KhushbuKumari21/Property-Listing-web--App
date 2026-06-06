@@ -1,92 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Marketplace</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PropertyNest — Find Your Dream Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel ="stylesheet" href="styles.css">
+
+  
 </head>
 <body>
-    <!-- Registration Form -->
-    <section class="registration">
-        <h2>Register</h2>
-        <form id="registrationForm">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" required>
 
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" required>
+<!-- TOAST CONTAINER -->
+<div class="toast-wrap" id="toastWrap"></div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+<!-- MODAL -->
+<div class="modal-overlay section-hidden" id="interestModal">
+  <div class="modal">
+    <div class="modal-title">Express Interest</div>
+    <div class="modal-sub" id="modalPropertyName">Interested in this property</div>
+    <div class="field" style="margin-bottom:1rem;">
+      <label>Your Name</label>
+      <input type="text" id="modalName" placeholder="e.g. Rahul Sharma" />
+    </div>
+    <div class="field">
+      <label>Your Email</label>
+      <input type="email" id="modalEmail" placeholder="you@example.com" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-gold" style="flex:1;" onclick="submitInterest()">Send Request</button>
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Premium Real Estate Platform</div>
+  <h1>Find Your <em>Dream</em> Property</h1>
+  <p class="hero-sub">Buy, sell, and discover exceptional properties with ease</p>
+</div>
 
-            <label for="userType">I am a</label>
-            <select id="userType" name="userType" required>
-                <option value="seller">Seller</option>
-                <option value="buyer">Buyer</option>
-            </select>
+<div class="app">
 
-            <button type="submit">Register</button>
-        </form>
-    </section>
-    
+  <!-- STEP 1: REGISTRATION -->
+  <div id="step1" class="card">
+    <div class="step-badge">Step 1</div>
+    <div class="card-title">Create Your Account</div>
 
+    <div class="form-grid">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" id="firstName" placeholder="khushbu" />
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" id="lastName" placeholder="kumari" />
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="khushbu@example.com" />
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+91 98765 43210" />
+      </div>
+    </div>
 
+    <hr class="divider" />
 
-    <!-- Seller Section -->
-    <section class="seller-section" style="display: none;">
-        <h2>Post Property</h2>
-        <form id="postPropertyForm">
-            <label for="propertyTitle">Property Title</label>
-            <input type="text" id="propertyTitle" name="propertyTitle" required>
+    <div class="step-badge" style="margin-bottom:0.8rem;">I want to</div>
+    <div class="type-selector">
+      <div class="type-option active" id="opt-seller" onclick="selectType('seller')">
+        <span class="icon">🏠</span>
+        <div class="label">Sell / List</div>
+        <div class="desc">Post my property</div>
+      </div>
+      <div class="type-option" id="opt-buyer" onclick="selectType('buyer')">
+        <span class="icon">🔍</span>
+        <div class="label">Buy / Rent</div>
+        <div class="desc">Find a property</div>
+      </div>
+    </div>
+    <input type="hidden" id="userType" value="seller" />
 
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" required>
+    <button class="btn btn-gold btn-full" onclick="handleRegister()">Continue →</button>
+  </div>
 
-            <label for="area">Area (sq ft)</label>
-            <input type="number" id="area" name="area" required>
+  <!-- SELLER SECTION -->
+  <div id="sellerSection" class="section-hidden">
+    <div class="card">
+      <div class="step-badge">Seller Dashboard</div>
+      <div class="card-title">Post a Property</div>
 
-            <label for="bedrooms">Number of Bedrooms</label>
-            <input type="number" id="bedrooms" name="bedrooms" required>
-
-            <label for="bathrooms">Number of Bathrooms</label>
-            <input type="number" id="bathrooms" name="bathrooms" required>
-
-            <label for="nearbyFacilities">Nearby Facilities (Hospitals, Colleges, etc.)</label>
-            <input type="text" id="nearbyFacilities" name="nearbyFacilities" required>
-
-            <button type="submit">Post Property</button>
-        </form>
-
-        <h2>Your Properties</h2>
-        <div id="sellerPropertiesList">
-            <!-- Seller's properties will be listed here -->
+      <div class="form-grid">
+        <div class="field full">
+          <label>Property Title</label>
+          <input type="text" id="propertyTitle" placeholder="e.g. Spacious 3BHK in Koramangala" />
         </div>
-    </section>
-
-    <!-- Buyer Section -->
-    <section class="buyer-section" style="display: none;">
-        <h2>Available Properties</h2>
-        <div class="filters">
-            <label for="filterPrice">Max Price</label>
-            <input type="number" id="filterPrice" name="filterPrice">
-
-            <label for="filterBedrooms">Min Bedrooms</label>
-            <input type="number" id="filterBedrooms" name="filterBedrooms">
-
-            <button type="button" id="applyFilters">Apply Filters</button>
+        <div class="field">
+          <label>Price (₹)</label>
+          <input type="number" id="price" placeholder="5000000" />
         </div>
-        <div id="propertyList">
-            <!-- Property items will be dynamically added here -->
+        <div class="field">
+          <label>Area (sq ft)</label>
+          <input type="number" id="area" placeholder="1200" />
         </div>
-        <div id="pagination">
-            <!-- Pagination buttons will be dynamically added here -->
+        <div class="field">
+          <label>Bedrooms</label>
+          <input type="number" id="bedrooms" placeholder="3" min="1" />
         </div>
-    </section>
+        <div class="field">
+          <label>Bathrooms</label>
+          <input type="number" id="bathrooms" placeholder="2" min="1" />
+        </div>
+        <div class="field full">
+          <label>Nearby Facilities</label>
+          <input type="text" id="nearbyFacilities" placeholder="Hospital, School, Metro, Mall" />
+        </div>
+      </div>
 
-    <script src="script.js"></script>
+      <button class="btn btn-gold btn-full" onclick="postProperty()">Post Property</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Your Listings</div>
+      <div id="sellerPropertiesList">
+        <div class="empty">
+          <span class="empty-icon">📋</span>
+          <p>No properties posted yet.<br/>Post your first listing above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUYER SECTION -->
+  <div id="buyerSection" class="section-hidden">
+    <div class="card">
+      <div class="card-title">Available Properties</div>
+
+      <div class="filter-bar">
+        <div class="field">
+          <label>Max Price (₹)</label>
+          <input type="number" id="filterPrice" placeholder="Any price" />
+        </div>
+        <div class="field">
+          <label>Min Bedrooms</label>
+          <input type="number" id="filterBedrooms" placeholder="Any" min="1" />
+        </div>
+        <button class="btn btn-gold" onclick="applyFilters()">Search</button>
+        <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+      </div>
+
+      <div id="propertyList"></div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+<script src="script.js"></script>
+
 </body>
 </html>
